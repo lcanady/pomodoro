@@ -25,9 +25,15 @@
       <!-- Navigation -->
       <nav class="center">
         <ul class="body1">
-          <li class="active pointer">pomodoro</li>
-          <li class="pointer">short break</li>
-          <li class="pointer">long break</li>
+          <li class="active pointer" onclick="timer.select('pomodoro')">
+            pomodoro
+          </li>
+          <li class="pointer" onclick="timer.select('shortbreak')">
+            short break
+          </li>
+          <li class="pointer" onclick="timer.select('longbreak')">
+            long break
+          </li>
         </ul>
         <div id="bgindicator"></div>
       </nav>
@@ -41,7 +47,9 @@
           </div>
           <div id="textcontainer">
             <h1 id="time">00:00</h1>
-            <h3 id="action" class="pointer">pause</h3>
+            <h3 id="action" class="pointer" onclick="action(this.innerText)">
+              start
+            </h3>
           </div>
         </div>
       </section>
@@ -156,6 +164,6 @@
         <div id="settingsoverlay"></div>
       </section>
     </div>
-    <script src="./js/index.js" type="module"></script>
+    <script src="./js/index.js"></script>
   </body>
 </html>
