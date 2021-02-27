@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="css/styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/pomodoro.png"
+    />
+
+    <title>pomodoro</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <h2 class="center">pomodoro</h2>
+      <nav class="center">
+        <ul class="body1">
+          <li class="active pointer">pomodoro</li>
+          <li class="pointer">short break</li>
+          <li class="pointer">long break</li>
+        </ul>
+        <div id="bgindicator"></div>
+      </nav>
+      <section id="timer" class="center">
+        <div id="outercircle">
+          <div id="innercircle">
+            <svg id="ring">
+              <circle r="163" cx="50%" cy="50%"></circle>
+            </svg>
+          </div>
+          <div id="textcontainer">
+            <h1 id="time">17:59</h1>
+            <h3 id="action">pause</h3>
+          </div>
+        </div>
+      </section>
+      <section id="settings" class="center">
+        <img class="pointer" src="assets/icon-settings.svg" />
+      </section>
+      <section id="settingscontainer">
+        <div id="formouter">
+          <form>
+            <div id="settingsheader">
+              <h2>Settings</h2>
+              <img
+                src="assets/icon-close.svg"
+                id="close"
+                height="14px"
+                width="14px"
+              />
+            </div>
+            <hr />
+            <div id="settingstime">
+              <h4>time (minutes)</h4>
+              <div id="inputs">
+                <div class="input">
+                  <label for="pomodoro" class="body2">pomodoro</label>
+                  <div class="inputnumber">
+                    <input
+                      id="pomodoro"
+                      type="number"
+                      value="25"
+                      class="body1"
+                      min="0"
+                    />
+                    <div class="inputbuttons">
+                      <button class="uparrow" onclick="inc('pomodoro')">
+                        <img src="/assets/icon-arrow-up.svg" />
+                      </button>
+                      <button class="downarrow" onclick="dec('pomodoro')">
+                        <img src="/assets/icon-arrow-down.svg" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="input">
+                  <label for="shortbreak" class="body2">short break</label>
+                  <div class="inputnumber">
+                    <input
+                      id="shortbreak"
+                      type="number"
+                      value="5"
+                      class="body1"
+                      min="0"
+                    />
+                    <div class="inputbuttons">
+                      <button class="uparrow" onclick="inc('shortbreak')">
+                        <img src="/assets/icon-arrow-up.svg" />
+                      </button>
+                      <button class="downarrow" onclick="dec('shortbreak')">
+                        <img src="/assets/icon-arrow-down.svg" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="input">
+                  <label for="longbreak" class="body2">long break</label>
+                  <div class="inputnumber">
+                    <input
+                      id="longbreak"
+                      type="number"
+                      value="15"
+                      class="body1"
+                      min="0"
+                    />
+                    <div class="inputbuttons">
+                      <button class="uparrow" onclick="inc('longbreak')">
+                        <img src="/assets/icon-arrow-up.svg" />
+                      </button>
+                      <button class="downarrow" onclick="dec('longbreak')">
+                        <img src="/assets/icon-arrow-down.svg" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div id="settingsoverlay"></div>
+      </section>
+    </div>
+    <script src="js/index.js"></script>
+  </body>
+</html>
