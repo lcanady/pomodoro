@@ -15,7 +15,6 @@ export class Timer {
     this.text = this.timer <= 9 ? `0${this.timer}` : `${this.timer}`;
     this.actionElement.innerText = "start";
     this.clock.innerText = `${this.text}:00`;
-    console.log(Date.now());
   }
 
   /**
@@ -28,16 +27,27 @@ export class Timer {
   }
 
   start() {
-    const startTime = Date.now() - this.timerElement.value;
-    console.log(starttime);
-    const display = (time) => (time <= 9 ? `0${time}` : `${time}`);
-    this.countdown = setInterval(() => {
-      let now = Date.now();
-      let timeleft = startTime - now;
-      let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-      console.log(seconds);
-      this.clock.innerText = `${display(minutes)}:${display(seconds)}`;
+    // Set the start time
+    let timer = this.timerElement.value * 60;
+    let minutes = 0;
+    let seconds = 0;
+    // start an interval of 1 second to track time
+    let interval = setInterval(() => {
+      minutes = parseInt(timer / 60, 10);
+      seconds = parseInt(timer % 60, 10);
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      // Set the clock display.
+      this.clock.innerText = minutes + ":" + seconds;
+
+      // Clear the interval when we're done!
+      if (--timer < 0) {
+        timer = 0;
+        clearInterval(interval);
+        this.actionElement.innerText = "reset";
+      }
     }, 1000);
   }
 }

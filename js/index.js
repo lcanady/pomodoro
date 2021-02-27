@@ -79,5 +79,5 @@ const inc = (input) => document.getElementById(input).stepUp(1);
 
 const dec = (input) => document.getElementById(input).stepDown(1);
 
-timer.select("pomodoro");
+timer.select("shortbreak");
 timer.start();
