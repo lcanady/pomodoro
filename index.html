@@ -31,6 +31,7 @@
         </ul>
         <div id="bgindicator"></div>
       </nav>
+      <!-- The Timer -->
       <section id="timer" class="center">
         <div id="outercircle">
           <div id="innercircle">
@@ -39,8 +40,8 @@
             </svg>
           </div>
           <div id="textcontainer">
-            <h1 id="time">17:59</h1>
-            <h3 id="action">pause</h3>
+            <h1 id="time">00:00</h1>
+            <h3 id="action" class="pointer">pause</h3>
           </div>
         </div>
       </section>
@@ -75,6 +76,7 @@
               1. .inputbuttons which holds the replacement buttons.  They fire off
                   a function in index.js to handle incrementing/decrementing.
             -->
+            <!-- Timer settings -->
             <div id="settingstime">
               <h4>time (minutes)</h4>
               <div id="inputs">
@@ -89,8 +91,14 @@
                       class="body1"
                       min="0"
                     />
-                    <!-- The nested replacement buttons -->
+                    <!-- 
+                      The nested replacement buttons
+                      The button container
+                    -->
                     <div class="inputbuttons">
+                      <!-- 
+                        The up and down arrows.
+                      -->
                       <button class="uparrow" onclick="inc('pomodoro')">
                         <img src="/assets/icon-arrow-up.svg" />
                       </button>
@@ -148,6 +156,6 @@
         <div id="settingsoverlay"></div>
       </section>
     </div>
-    <script src="js/index.js"></script>
+    <script src="./js/index.js" type="module"></script>
   </body>
 </html>
