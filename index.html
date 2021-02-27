@@ -21,6 +21,8 @@
   <body>
     <div id="wrapper">
       <h2 class="center">pomodoro</h2>
+
+      <!-- Navigation -->
       <nav class="center">
         <ul class="body1">
           <li class="active pointer">pomodoro</li>
@@ -42,6 +44,8 @@
           </div>
         </div>
       </section>
+
+      <!-- Settings section:  Calling gear button -->
       <section id="settings" class="center">
         <img class="pointer" src="assets/icon-settings.svg" />
       </section>
@@ -58,12 +62,26 @@
               />
             </div>
             <hr />
+            <!-- 
+              Here be dragons.  This is basically what's happening in this blob
+              of code:
+
+              1. #settings<section> - time, font or color.
+              2. .inputs for the section to group them all,
+              3. .input for the individual input.
+
+              NOTE ON Number input types - Totally custom buttons and arrows needed
+              to match the figma file.  So I have
+              1. .inputbuttons which holds the replacement buttons.  They fire off
+                  a function in index.js to handle incrementing/decrementing.
+            -->
             <div id="settingstime">
               <h4>time (minutes)</h4>
               <div id="inputs">
                 <div class="input">
                   <label for="pomodoro" class="body2">pomodoro</label>
                   <div class="inputnumber">
+                    <!-- The actual input -->
                     <input
                       id="pomodoro"
                       type="number"
@@ -71,6 +89,7 @@
                       class="body1"
                       min="0"
                     />
+                    <!-- The nested replacement buttons -->
                     <div class="inputbuttons">
                       <button class="uparrow" onclick="inc('pomodoro')">
                         <img src="/assets/icon-arrow-up.svg" />
