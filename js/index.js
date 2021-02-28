@@ -134,20 +134,57 @@ navlinks.forEach((nav, i) =>
 const settingsContainer = document.getElementById("settingscontainer");
 
 // Click to open the settings window
-document
-  .querySelector("#settings > img")
-  .addEventListener("click", () => (settingsContainer.style.display = "block"));
+document.querySelector("#settings > img").addEventListener("click", () => {
+  settingsContainer.style.visibility = "visible";
+  settingsContainer.style.opacity = 1;
+});
+
+// ---------------------------------------------------------------------------
+// Settings
+// ---------------------------------------------------------------------------
+
+// Create a settings object to hold our different presets:
+const settings = {
+  pomodoro: 25,
+  shortbreak: 5,
+  longbreak: 15,
+  font: "Kumbh Sans",
+  color: "orange",
+};
+
+const settingsDefault = {
+  pomodoro: 25,
+  shortbreak: 5,
+  longbreak: 15,
+  font: "Kumbh Sans",
+  color: "orange",
+};
+
+/**
+ *
+ * @param {string} setting The setting key we want to change
+ * @param {any} val The value to set.
+ */
+const form = document.getElementsByTagName("form")[0];
+const mapSettings = (setting, val) => {
+  settings[setting] = val;
+  document
+    .querySelectorAll("form h2, form h4")
+    .forEach((item) => (item.style.fontFamily = settings.font));
+};
 
 // Settings Overlay
 // When someone clicks on the background, it should close the settings window.
-document
-  .getElementById("settingsoverlay")
-  .addEventListener("click", () => (settingsContainer.style.display = "none"));
+document.getElementById("settingsoverlay").addEventListener("click", () => {
+  settingsContainer.style.opacity = 0;
+  settingsContainer.style.visibility = "hidden";
+});
 
 // Settings close button
-document
-  .getElementById("close")
-  .addEventListener("click", () => (settingsContainer.style.display = "none"));
+document.getElementById("close").addEventListener("click", () => {
+  settingsContainer.style.opacity = 0;
+  settingsContainer.style.visibility = "hidden";
+});
 
 // prevent default on the up and down buttons
 document.querySelectorAll(".uparrow").forEach((arrow) =>
@@ -175,7 +212,28 @@ const inc = (input) => document.getElementById(input).stepUp(1);
 
 const dec = (input) => document.getElementById(input).stepDown(1);
 
+// Font Buttons
+const fontButtons = document.querySelectorAll(".font");
+
+fontButtons.forEach((button) =>
+  button.addEventListener("click", (ev) => {
+    // remove the active status from all font button divs
+    fontButtons.forEach((btn) => btn.classList.remove("fontactive"));
+    // Set the active status on the current font selection
+    button.classList.add("fontactive");
+    if (button.classList.contains("kumbh")) {
+      mapSettings("font", "'kumbh Sans', sans-seif");
+    } else if (button.classList.contains("roboto")) {
+      mapSettings("font", '"Roboto Slab", serif');
+    } else {
+      mapSettings("font", '"Space Mono", monospace');
+    }
+  })
+);
+
+// Apply button
 document.getElementById("apply").addEventListener("click", (ev) => {
   ev.preventDefault();
-  settingsContainer.style.display = "none";
+  settingsContainer.style.opacity = 0;
+  settingsContainer.style.visibility = "hidden";
 });

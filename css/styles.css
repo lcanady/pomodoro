@@ -78,11 +78,11 @@ nav > ul > li {
 }
 
 form {
+  position: relative;
   pointer-events: auto;
   margin: auto;
   border-radius: 25px;
   width: 550px;
-  height: 494px;
   background-color: var(--white);
 }
 
@@ -175,12 +175,13 @@ Structural ids
 }
 
 #settingscontainer {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
   z-index: 100;
   position: absolute;
   width: 100%;
   height: 100vh;
-  transition: display ease-in 500ms;
+  transition: opacity ease-in 0.2s, visibility linear 0.5s;
 }
 
 /*
@@ -246,7 +247,7 @@ The 'inner' is the size of the actual settings form.
   margin-right: auto;
 }
 
-.fontcircle {
+.circle {
   border-radius: 25px;
   margin-left: 16px;
   height: 40px;
@@ -264,6 +265,16 @@ The 'inner' is the size of the actual settings form.
   color: var(--white);
 }
 
+.font:hover {
+  border: 4px solid #fff;
+  box-shadow: 0 0 2px #888;
+}
+
+.fontactive:hover {
+  border: none;
+  box-shadow: none;
+}
+
 #innerfont {
   margin: 24px 0;
   display: flex;
@@ -274,6 +285,7 @@ The 'inner' is the size of the actual settings form.
 
 #settingscolor {
   padding: 24px 40px;
+  padding-bottom: 60px;
   height: 40px;
   width: 100%;
   display: flex;
@@ -301,8 +313,9 @@ The 'inner' is the size of the actual settings form.
 }
 
 #apply {
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  bottom: -20px;
+  left: calc(50% - 200px / 2);
   font-weight: bold;
   color: var(--white);
   text-transform: capitalize;
@@ -318,6 +331,14 @@ The 'inner' is the size of the actual settings form.
 
 #apply:hover {
   background-color: #f98d8d;
+}
+
+.color img {
+  opacity: 0;
+}
+
+.coloractive img {
+  opacity: 1;
 }
 
 .orange {
