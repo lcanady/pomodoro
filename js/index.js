@@ -8,11 +8,16 @@ class Timer {
    * @returns {Object}
    */
   constructor(type = "pomodoro") {
-    this.timerElement = document.getElementById(type);
+    this.type = type;
+    this.pomodoro = 25;
+    this.shortbreak = 5;
+    this.longbreak = 15;
+    this.circle = document.querySelector("#ring > circle");
+    this.timeElement = window[type];
     this.clock = document.getElementById("time");
     this.actionElement = document.getElementById("action");
-    this.timer = this.timerElement.value;
-    this.text = this.timer <= 9 ? `0${this.timer}` : `${this.timer}`;
+    this.time = this.timeElement;
+    this.text = this.time <= 9 ? `0${this.time}` : `${this.time}`;
   }
 
   /**
@@ -20,8 +25,9 @@ class Timer {
    */
   reset() {
     this.stop();
-    this.timer = this.timerElement.value;
-    this.text = this.timer <= 9 ? `0${this.timer}` : `${this.timer}`;
+    this.circle.style.strokeDashoffset = 1024;
+    this.time = this[this.type];
+    this.text = this.time <= 9 ? `0${this.time}` : `${this.time}`;
     this.actionElement.innerText = "start";
     this.clock.innerText = `${this.text}:00`;
   }
@@ -31,7 +37,7 @@ class Timer {
    * @param {string} type
    */
   select(type) {
-    this.timerElement = document.getElementById(type);
+    this.type = type;
     this.reset();
   }
 
@@ -39,24 +45,32 @@ class Timer {
    * Start running the timer
    */
   start() {
+    const format = (time) => (time < 10 ? "0" + time : time);
     // Set the start time
-    this.timer = this.timerElement.value * 60;
+    let time = this[this.type] * 60;
+    this.clock.innerText = `${this.text}:00`;
+    this.circle.style.strokeDashoffset = 1024;
+    let startTime = time;
     let minutes = 0;
     let seconds = 0;
     // start an interval of 1 second to track time
+    time--;
     this.interval = setInterval(() => {
-      minutes = parseInt(this.timer / 60, 10);
-      seconds = parseInt(this.timer % 60, 10);
+      minutes = Math.floor(time / 60);
+      seconds = Math.floor(time % 60);
 
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
+      minutes = format(minutes);
+      seconds = format(seconds);
 
       // Set the clock display.
-      this.clock.innerText = minutes + ":" + seconds;
+      this.clock.innerText = `${minutes}:${seconds}`;
+      const percent = ((time % startTime) / startTime) * 100;
+      const offset = (percent / 100) * 1024;
 
+      this.circle.style.strokeDashoffset = offset;
       // Clear the interval when we're done!
-      if (--this.timer < 0) {
-        this.timer = 0;
+      if (--time < 0) {
+        time = 0;
         clearInterval(this.interval);
         this.actionElement.innerText = "reset";
       }
@@ -66,9 +80,29 @@ class Timer {
 
   stop() {
     clearInterval(this.interval);
-    this.actionElement.innerText = "reset";
+    this.actionElement.innerText = "start";
   }
 }
+
+// ---------------------------------------------------------------------------
+// Timer Functions
+// ---------------------------------------------------------------------------
+
+const timer = new Timer();
+timer.reset();
+
+const action = (action = "stop") => {
+  switch (action.toLowerCase()) {
+    case "start":
+      timer.start();
+      break;
+    case "reset":
+      timer.reset();
+    default:
+      timer.stop();
+      break;
+  }
+};
 
 // ---------------------------------------------------------------------------
 // Navigation
@@ -93,26 +127,6 @@ navlinks.forEach((nav, i) =>
     nav.classList.add("active");
   })
 );
-
-// ---------------------------------------------------------------------------
-// Timer Functions
-// ---------------------------------------------------------------------------
-
-const timer = new Timer();
-timer.reset();
-
-const action = (action = "stop") => {
-  switch (action.toLowerCase()) {
-    case "start":
-      timer.start();
-      break;
-    case "reset":
-      timer.reset();
-    default:
-      timer.stop();
-      break;
-  }
-};
 
 // ---------------------------------------------------------------------------
 // Settings Gear

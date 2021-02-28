@@ -143,10 +143,11 @@ Structural ids
   stroke: var(--orange);
   stroke-width: 10;
   stroke-dasharray: 1024, 1024;
-  stroke-dashoffset: 100;
+  stroke-dashoffset: 0;
   stroke-linecap: round;
   transform: rotate(-90deg);
   transform-origin: 50% 50%;
+  transition: stroke-dashoffset 200ms ease-out;
 }
 
 #textcontainer {
