@@ -19,17 +19,17 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Kumbh Sans", sans-serif;
-  color: var(--light-blue);
 }
 
 /* 
 -------------------------------------------------------------------------------
-  HTML elements 
+HTML elements 
 -------------------------------------------------------------------------------
 */
 
 body {
+  font-family: "Kumbh Sans", sans-serif;
+  color: var(--light-blue);
   background-color: var(--dark-blue);
 }
 
@@ -314,6 +314,7 @@ The 'inner' is the size of the actual settings form.
 
 #apply {
   position: absolute;
+  z-index: 140;
   bottom: -20px;
   left: calc(50% - 200px / 2);
   font-weight: bold;
@@ -322,7 +323,7 @@ The 'inner' is the size of the actual settings form.
   font-size: 16px;
   height: 53px;
   width: 200px;
-  background-color: var(--orange);
+  background-color: transparent;
   border-radius: 50px;
   border-style: none;
   border: none;
@@ -330,7 +331,21 @@ The 'inner' is the size of the actual settings form.
 }
 
 #apply:hover {
-  background-color: #f98d8d;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+#applybg {
+  position: absolute;
+  bottom: -20px;
+  left: calc(50% - 200px / 2);
+  font-weight: bold;
+  height: 53px;
+  width: 200px;
+  background-color: var(--orange);
+  border-radius: 50px;
+  border-style: none;
+  border: none;
+  outline: none;
 }
 
 .color img {
